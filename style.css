@@ -232,7 +232,7 @@ img#demo0{
     display: inline-block;
     background-color: blue;
     border-radius: 2px;
-    color: white;
+    color: rgba(248, 242, 242, 0.912);
     padding: 5px 7px;
     margin: 5PX;
     border-radius: 1px;
@@ -359,12 +359,16 @@ main {
     min-height: calc(100vh - 107px);
 }
 main .inner-container {
+    border: solid;
     max-width: 800px;
-    margin: 0 auto;
+    
+    padding: 10px;
+    width: 450px;
 }
 table.invoice {
     background: #fff;
 }
+
 
 #invoice-text {
     display: flex;
@@ -381,6 +385,7 @@ table.invoice tr, table.invoice td {
     text-align: left;
     font-weight: 400;
     color: #322d28;
+    width: 100% ;
 }
 table.invoice tr.header td img {
     max-width: 300px;
@@ -396,7 +401,7 @@ table.invoice tr.intro td:nth-child(2) {
     text-align: right;
 }
 table.invoice tr.details > td {
-    padding-top: 4rem;
+    padding-top: 2rem;
     padding-bottom: 0;
 }
 table.invoice tr.details td.id, table.invoice tr.details th.id, table.invoice tr.details td.qty, table.invoice tr.details th.qty {
@@ -456,10 +461,46 @@ table.invoice tr.totals table tr.total td {
 table.invoice tr.totals table tr.total td:last-child {
     font-weight: 700;
 }
-.additional-info h5 {
+.row{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+.additional-info h4 {
     font-size: 0.8em;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
     color: #1779ba;
+
 }
+.qty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Add spacing between elements */
+  }
+  
+  .qty button {
+    width: 15px;
+    height: 30px;
+    font-size: 18px;
+    line-height: 0;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .qty .quantity {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    width: 30px; /* Ensure proper alignment */
+  }
+  #btn{
+    background-color: #666;
+    padding: 5px;
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    justify-items: center;
+  }
