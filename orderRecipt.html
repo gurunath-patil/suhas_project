@@ -45,15 +45,15 @@
 												</thead>
 												<tbody>
 													<tr class="item">
-														<td class="desc">Name or Description of item</td>
-														<td class="id num"></td>
+														<td class="desc">Name or Description of Item</td>
+														<td id="rate">1000</td>
 														<td class="qty">
-															<button type="button" class="decrement">-</button>
-															<span class="quantity">1</span>
-															<button type="button" class="increment">+</button>
-														  </td>
-														<td class="amt">₹100.00</td>
-													</tr>
+														  <button type="button" class="decrement">-</button>
+														  <span id="quantity">1</span>
+														  <button type="button" class="increment">+</button>
+														</td>
+														<td id="amt">₹</td>
+													  </tr>
 												</tbody>
 											</table>
 										</td>
@@ -64,19 +64,19 @@
 											<table>
 												<tr class="subtotal">
 													<td class="num">Subtotal</td>
-													<td class="num">₹100.00</td>
+													<td id="subtotal">₹</td>
 												</tr>
 												<tr class="fees">
 													<td class="num">Shipping & Handling</td>
-													<td class="num">₹0.00</td>
+													<td id="fees">₹80.50</td>
 												</tr>
 												<tr class="tax">
 													<td class="num">Tax (7%)</td>
-													<td class="num">₹7.00</td>
+													<td class="tax">₹7.00</td>
 												</tr>
 												<tr class="total">
 													<td>Total</td>
-													<td>₹107.00</td>
+													<td id="total">₹</td>
 												</tr>
 											</table>
 										</td>
@@ -113,24 +113,46 @@
 			</div>
 		</header>
 	</body>
-	<script>
-		
-		const decrementBtn = document.querySelector('.decrement');
-		const incrementBtn = document.querySelector('.increment');
-		const quantityDisplay = document.querySelector('.quantity');
-	  
-		incrementBtn.addEventListener('click',()=>{
-			let currentvalue=parseInt(quantityDisplay.textContent);
-			if(currentvalue < 10){
-				quantityDisplay.textContent=currentvalue +1;
-			}
-		})
+</tbody>
+</table>
 
-		decrementBtn.addEventListener('click',()=>{
-			let currentvalue=parseInt(quantityDisplay.textContent);
-			if(currentvalue>1){
-				quantityDisplay.textContent=currentvalue -1;
-			}
-		})
-	  </script>
+<script>
+  
+	const rate = parseFloat(document.getElementById('rate').innerText); 
+	const quantityElement = document.getElementById('quantity');       
+	const amountElement = document.getElementById('amt');
+	const subtotalAmt =  document.getElementById('subtotal'); 
+	const ShippingAmt = document.getElementById('fees'); 
+	const taxAmt = document.getElementById('tax');
+	const totalAmt = document.getElementById('total')           
+
+	
+	function updateAmount() {
+	  const quantity = parseInt(quantityElement.innerText);
+	  const total = rate * quantity;
+	  amountElement.innerText = `₹${total.toFixed(2)}`;
+	  subtotalAmt.innerText = `₹${total.toFixed(2)}`;
+	 
+	}
+
+
+
+	document.querySelector('.decrement').addEventListener('click', () => {
+	  let quantity = parseInt(quantityElement.innerText);
+	  if (quantity > 0) {
+		quantityElement.innerText = quantity - 1;
+		updateAmount();
+	  }
+	});
+
+	
+	document.querySelector('.increment').addEventListener('click', () => {
+	  let quantity = parseInt(quantityElement.innerText);
+	  if(quantity <10){
+	  quantityElement.innerText = quantity + 1;
+	  updateAmount();
+	}
+	});
+  
+</script>
 </html>

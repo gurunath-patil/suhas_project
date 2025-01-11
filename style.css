@@ -227,8 +227,10 @@ img#demo0{
     font-size: 20px;
     margin-top: 10px;
 }
-
-.buy{
+  .buy-card{
+    color: rgba(248, 242, 242, 0.912);
+  }
+.buy {
     display: inline-block;
     background-color: blue;
     border-radius: 2px;
