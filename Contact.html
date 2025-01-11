@@ -16,6 +16,7 @@
 			href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
 			integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
 			crossorigin="anonymous" />
+		<script src="./script.js"></script>
 	</head>
 	<body>
 		<!-- navbar  -->
@@ -53,35 +54,47 @@
 				</p>
 
 				<div class="row g-4 py-6">
-					<div class="col-md-6">
+					<div class="col-md-6 overflow-hidden">
 						<iframe
 							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15286.373312819367!2d74.22492198715818!3d16.697221700000018!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc1003fb43b9daf%3A0x6eaa6576205d4e0!2sPets%20Villa%20-%20Pet%20Shop%20in%20Kolhapur!5e0!3m2!1sen!2sin!4v1710402337985!5m2!1sen!2sin"
 							allowfullscreen=""
 							loading="lazy"
 							referrerpolicy="no-referrer-when-downgrade"
-							style="width: 90%; height: 90%"></iframe>
+							style="width: 90%; height: 90%"
+							class="w-100 h-100 border-2 border-dark rounded"></iframe>
 
-						<h5 class="card-tittle" style="text-align: center">Visit Pet Shop</h5>
+						<!-- <h5 class="card-tittle" style="text-align: center">Visit Pet Shop</h5> -->
 					</div>
 					<div class="col-md-5">
 						<div class="card">
 							<h4>Get in Touch</h4>
-
-							<div class="mb-3">
-								<label for="input1" class="form-label">Your name</label>
-								<input type="text" class="form-control" id="input1" placeholder="Enter your name" />
-							</div>
-							<div class="mb-3">
-								<label for="input1" class="form-label">Email Address</label>
-								<input type="email" class="form-control" id="input1" placeholder="name@gmial.com" />
-							</div>
-							<div class="mb-3">
-								<label for="textarea" class="form-label">How can we help</label>
-								<textarea class="form-control" id="textarea" rows="3"></textarea>
-							</div>
-							<div class="mb-3">
-								<button class="btn btn-primary mt-3">Submit</button>
-							</div>
+							<form action="" id="submit-btn">
+								<div class="mb-3">
+									<label for="name" class="form-label">Your name</label>
+									<input
+										type="text"
+										class="form-control"
+										id="name"
+										name="name"
+										placeholder="Enter your name" />
+								</div>
+								<div class="mb-3">
+									<label for="email" class="form-label">Email Address</label>
+									<input
+										type="email"
+										class="form-control"
+										id="email"
+										name="email"
+										placeholder="name@gmial.com" />
+								</div>
+								<div class="mb-3">
+									<label for="msg" class="form-label">How can we help</label>
+									<textarea class="form-control" id="msg" name="msg" rows="3"></textarea>
+								</div>
+								<div class="mb-3">
+									<button class="btn btn-primary mt-3">Submit</button>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -148,5 +161,33 @@
 				</div>
 			</div>
 		</footer>
+
+		<!-- script file  -->
+		<script>
+			const submitBtn = document.getElementById('submit-btn')
+			submitBtn.addEventListener('submit', async (res) => {
+				res.preventDefault()
+				let data = {}
+				const element = res.target.elements
+				for (let item = 0; item < element.length - 1; item++) {
+					if (element[item].name != '') {
+						data[element[item].name] = element[item].value
+					}
+				}
+
+				const serverResponse = await fetch('http://localhost:5502/contact-details', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(data),
+				})
+
+				if (serverResponse.status == 200) {
+					alert('your data saved!')
+				}
+				window.location.href = './Home.html'
+			})
+		</script>
 	</body>
 </html>
